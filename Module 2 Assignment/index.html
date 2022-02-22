@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment 2</title>
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script
+      type="module"
+      src="https://unpkg.com/prop-types@15.7.2/prop-types.min.js"
+    ></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+      function HelpFrom() {
+        const [message, setMessage] = React.useState("");
+        function changeMessage(e) {
+          setMessage(e.target.value);
+        }
+        return (
+          <div>
+            <h1>Assignment 2</h1>
+            <input type="text" value={message} onChange={changeMessage} />
+            <p>{message}</p>
+          </div>
+        );
+      }
+      ReactDOM.render(<HelpFrom />, document.getElementById("app"));
+    </script>
+  </body>
+</html>
