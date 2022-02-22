@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment -4</title>
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+      function Form() {
+        const [userName, setUserName] = React.useState("");
+        const [password, setPassword] = React.useState("");
+        const [email, setEmail] = React.useState("");
+        const [mobile, setMobile] = React.useState("");
+        const [errors, setErrors] = React.useState(null);
+
+        function getValidationErrors() {
+          let validationErrors = [];
+          if (userName.trim() === "")
+            validationErrors.push("Username cannot be empty");
+          if (password.trim() === "")
+            validationErrors.push("Password cannot be empty");
+          if (email.trim() === "")
+            validationErrors.push("Email id cannot be empty");
+          if (mobile.trim() === "")
+            validationErrors.push("Mobile number cannot be empty");
+          return validationErrors;
+        }
+
+        function HandleForm(e) {
+          e.preventDefault();
+
+          const validationErrors = getValidationErrors();
+
+          if (validationErrors.length > 0) {
+            setErrors(validationErrors);
+            return;
+          }
+          setErrors(null);
+          setUserName("");
+          setPassword("");
+          setEmail("");
+          setMobile("");
+
+          console.log(userName, password, email, mobile);
+        }
+
+        return (
+          <div>
+            <form onSubmit={HandleForm}>
+              <input
+                type="text"
+                placeholder="Enter your user name"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+              />
+              <br />
+              <input
+                type="password"
+                placeholder="Enter your Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <br />
+              <input
+                type="text"
+                placeholder="Enter your Email id"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <br />
+              <input
+                type="number"
+                placeholder="Enter your Mobile numbere"
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
+              />
+              <br />
+              <input type="submit" value="Login" />
+            </form>
+
+            <ul id="error">
+              {errors
+                ? errors.map((message, index) => <li key={index}>{message}</li>)
+                : null}
+            </ul>
+          </div>
+        );
+      }
+      ReactDOM.render(<Form />, document.getElementById("app"));
+    </script>
+  </body>
+</html>
